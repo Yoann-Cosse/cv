@@ -196,7 +196,7 @@
             <div class="contact-info">
                 <div>📍 32 route des Quatre Pompes, 29200 Brest</div>
                 <div>📱 06 50 09 49 61</div>
-                <div>✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0f766c607c7c6a4f68626e6663216c6062">[email&#160;protected]</a></div>
+                <div>✉️ <span id="email"></span></div>
             </div>
         </header>
 
@@ -391,3 +391,15 @@
 
             sections.forEach(section => {
                 section.style.opacity = '0';
+<script>
+  const user = "ycosse";
+  const domain = "protonmail.com";
+
+  const email = `${user}@${domain}`;
+
+  const emailElement = document.getElementById("email");
+  if (emailElement) {
+    emailElement.innerHTML =
+      `<a href="mailto:${email}">${email}</a>`;
+  }
+</script>
