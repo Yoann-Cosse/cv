@@ -194,9 +194,9 @@
             <h1>Yoann Cosse</h1>
             <div class="subtitle">Rédacteur Technique & Product Documentation Manager</div>
             <div class="contact-info">
-                <div>📍 32 route des Quatre Pompes, 29200 Brest</div>
-                <div>📱 06 50 09 49 61</div>
-                <div>✉️ <span id="email"></span></div>
+                <div>📍 Brest, France</div>
+                <div>📱 ✉️ <span id="email"><a href="#" onclick="revealEmail(event)">Afficher l’e-mail</a></span></div>
+                <div>✉️ 📞 <span id="phone"><a href="#" onclick="revealPhone(event)">Afficher le numéro</a></span></div>
             </div>
         </header>
 
@@ -392,14 +392,26 @@
             sections.forEach(section => {
                 section.style.opacity = '0';
 <script>
-  const user = "ycosse";
-  const domain = "protonmail.com";
+  function revealEmail(event) {
+    event.preventDefault();
 
-  const email = `${user}@${domain}`;
+    const user = "ycosse";
+    const domain = "protonmail.com";
+    const email = `${user}@${domain}`;
 
-  const emailElement = document.getElementById("email");
-  if (emailElement) {
-    emailElement.innerHTML =
-      `<a href="mailto:${email}">${email}</a>`;
+    const container = document.getElementById("email");
+    container.innerHTML = `<a href="mailto:${email}">${email}</a>`;
+  }
+
+  function revealPhone(event) {
+    event.preventDefault();
+
+    const parts = ["06", "50", "09", "49", "61"];
+    const phone = parts.join(" ");
+    const tel = parts.join("");
+
+    const container = document.getElementById("phone");
+    container.innerHTML = `<a href="tel:${tel}">${phone}</a>`;
   }
 </script>
+
