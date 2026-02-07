@@ -195,8 +195,8 @@
             <div class="subtitle">Rédacteur Technique & Product Documentation Manager</div>
             <div class="contact-info">
                 <div>📍 Brest, France</div>
-                <div>📱 ✉️ <span id="email"><a href="#" onclick="revealEmail(event)">Afficher l’e-mail</a></span></div>
-                <div>✉️ 📞 <span id="phone"><a href="#" onclick="revealPhone(event)">Afficher le numéro</a></span></div>
+                <div>📞 <span id="phone"><a href="#" onclick="revealPhone(event)">Afficher le numéro</a></span></div>
+                <div>✉️ <span id="email"><a href="#" onclick="revealEmail(event)">Afficher l’e-mail</a></span></div>
             </div>
         </header>
 
@@ -394,24 +394,22 @@
 <script>
   function revealEmail(event) {
     event.preventDefault();
-
     const user = "ycosse";
     const domain = "protonmail.com";
     const email = `${user}@${domain}`;
-
     const container = document.getElementById("email");
     container.innerHTML = `<a href="mailto:${email}">${email}</a>`;
   }
 
   function revealPhone(event) {
     event.preventDefault();
-
     const parts = ["06", "50", "09", "49", "61"];
-    const phone = parts.join(" ");
-    const tel = parts.join("");
-
+    const phoneDisplay = parts.join(" ");
+    const phoneLink = parts.join("");
     const container = document.getElementById("phone");
-    container.innerHTML = `<a href="tel:${tel}">${phone}</a>`;
+    container.innerHTML = `<a href="tel:${phoneLink}">${phoneDisplay}</a>`;
   }
 </script>
 
+</body>
+</html>
