@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoann Cosse - CV</title>
+    <style>
+        /* ==============================================
+           VARIABLES CSS - PALETTE DE COULEURS MODERNE
+           ============================================== */
+        :root {
+            /* Couleurs principales - Mode clair */
+            --bg: #ffffff;
+            --text: #1f2933;
+            --muted: #6b7280;
+            --accent: #2563eb;
+            
+            /* Couleurs secondaires */
+            --border-light: #e5e7eb;
+            --bg-section: #f9fafb;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --page-bg: #f3f4f6;
+        }
+
+        /* ==============================================
+           MODE SOMBRE - Adaptation automatique
+           ============================================== */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1f2937;
+                --text: #f9fafb;
+                --muted: #9ca3af;
+                --accent: #3b82f6;
+                --border-light: #374151;
+                --bg-section: #111827;
+                --shadow: rgba(0, 0, 0, 0.3);
+                --page-bg: #111827;
+            }
+
+            .header {
+                background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%) !important;
+            }
+
+            .experience-item, .education-item {
+                border-left-color: var(--border-light);
+            }
+
+            .skill-category {
+                background: var(--bg-section);
+                border-color: var(--border-light);
+            }
+        }
+
+        /* ==============================================
+           RESET ET BASE
+           ============================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.5;  /* Réduit de 1.6 à 1.5 pour compacter */
+            color: var(--text);
+            background: var(--page-bg);
+            padding: 20px;
+        }
+
+        /* ==============================================
+           CONTENEUR PRINCIPAL
+           ============================================== */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--bg);
+            box-shadow: 0 10px 40px var(--shadow);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        /* ==============================================
+           HEADER - EN-TÊTE DU CV
+           ============================================== */
+        .header {
+            background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+            color: white;
+            padding: 35px 40px 25px 40px;  /* Réduit pour gagner de l'espace */
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.3em;  /* Légèrement réduit */
+            margin-bottom: 8px;
+            color: white;
+        }
+
+        .header .subtitle {
+            font-size: 1.15em;  /* Légèrement réduit */
+            opacity: 0.95;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 15px;
+            padding: 12px 20px;  /* Réduit */
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            font-size: 0.9em;  /* Légèrement réduit */
+        }
+
+        .contact-info-item:not(:last-child)::after {
+            content: "•";
+            margin-left: 25px;
+            opacity: 0.6;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            border-bottom-color: white;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            color: white;
+            padding: 6px 14px;  /* Réduit */
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85em;  /* Légèrement réduit */
+            transition: all 0.3s ease;
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .download-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: translateY(-2px);
+        }
+
+        /* ==============================================
+           CONTENU PRINCIPAL
+           ============================================== */
+        .main-content {
+            padding: 30px 40px;  /* Réduit de 40px à 30px */
+        }
+
+        .section {
+            margin-bottom: 30px;  /* Réduit de 40px à 30px */
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section h2 {
+            color: var(--text);
+            font-size: 1.7em;  /* Légèrement réduit */
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 8px;  /* Réduit */
+            margin-bottom: 18px;  /* Réduit */
+        }
+
+        /* ==============================================
+           PROFIL PROFESSIONNEL - AÉRÉ AVEC POINTS CLÉS
+           ============================================== */
+        .profile-intro {
+            font-size: 1.05em;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .profile-highlights {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px;
+            background: var(--bg-section);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .highlight-icon {
+            font-size: 1.3em;
+            flex-shrink: 0;
+        }
+
+        .highlight-text {
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+
+        /* ==============================================
+           EXPÉRIENCES ET FORMATION
+           ============================================== */
+        .experience-item, .education-item {
+            margin-bottom: 22px;  /* Réduit */
+            padding-left: 18px;  /* Réduit */
+            border-left: 3px solid var(--border-light);
+        }
+
+        .experience-item h3, .education-item h3 {
+            color: var(--text);
+            font-size: 1.2em;  /* Légèrement réduit */
+            margin-bottom: 4px;
+        }
+
+        .date {
+            color: var(--accent);
+            font-style: italic;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        .company {
+            font-weight: bold;
+            color: var(--text);
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        /* ==============================================
+           COMPÉTENCES - GRILLE COMPACTE
+           ============================================== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);  /* Force 2 colonnes */
+            gap: 12px;  /* Réduit */
+        }
+
+        .skill-category {
+            background: var(--bg-section);
+            padding: 12px;  /* Réduit */
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+        }
+
+        .skill-category h4 {
+            color: var(--accent);
+            margin-bottom: 8px;  /* Réduit */
+            font-size: 1.05em;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            color: var(--text);
+            margin-bottom: 4px;  /* Réduit */
+            font-size: 0.93em;  /* Légèrement réduit */
+        }
+
+        .skill-list li:before {
+            content: "▸ ";
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* ==============================================
+           CENTRES D'INTÉRÊT - AVEC ICÔNES
+           ============================================== */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .interest-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: var(--bg-section);
+            border-radius: 10px;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .interest-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+            border-color: var(--accent);
+        }
+
+        .interest-icon {
+            font-size: 2em;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .interest-content {
+            flex: 1;
+        }
+
+        .interest-title {
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 4px;
+            font-size: 1em;
+        }
+
+        .interest-description {
+            font-size: 0.9em;
+            line-height: 1.4;
+            color: var(--text);
+        }
+
+        /* ==============================================
+           DESCRIPTION ET LISTES
+           ============================================== */
+        .description {
+            line-height: 1.5;  /* Réduit */
+            color: var(--text);
+        }
+
+        ul {
+            margin-left: 18px;  /* Réduit */
+            margin-top: 8px;  /* Réduit */
+        }
+
+        ul li {
+            color: var(--text);
+            margin-bottom: 6px;  /* Réduit */
+            font-size: 0.95em;
+        }
+
+        ul li strong {
+            color: var(--text);
+        }
+
+        /* ==============================================
+           RESPONSIVE - MOBILE
+           ============================================== */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+                border-radius: 20px;
+            }
+
+            .contact-info-item::after {
+                display: none;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .skills-grid,
+            .profile-highlights,
+            .interests-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ==============================================
+           IMPRESSION - OPTIMISÉ POUR PDF
+           ============================================== */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+                border-radius: 0;
+            }
+
+            .header {
+                background: var(--text) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                padding: 25px 30px 20px 30px;
+            }
+
+            .download-btn {
+                display: none;
+            }
+
+            .contact-info {
+                background: transparent;
+            }
+
+            .main-content {
+                padding: 20px 30px;
+            }
+
+            .section {
+                margin-bottom: 20px;
+                page-break-inside: avoid;
+            }
+
+            .experience-item,
+            .education-item {
+                page-break-inside: avoid;
+                margin-bottom: 15px;
+            }
+
+            .section h2 {
+                margin-top: 10px;
+                page-break-after: avoid;
+            }
+
+            /* Compactage pour impression */
+            body {
+                font-size: 11pt;
+                line-height: 1.3;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .header .subtitle {
+                font-size: 1em;
+            }
+
+            ul li {
+                margin-bottom: 3px;
+            }
+
+            .profile-highlights,
+            .interests-grid {
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Yoann Cosse</h1>
+            <div class="subtitle">Rédacteur Technique & Product Documentation Manager</div>
+            
+            <div class="contact-info">
+                <div class="contact-info-item">
+                    📍 Brest, France
+                </div>
+                <div class="contact-info-item">
+                    💬 <a
+                      href="https://www.linkedin.com/in/yoann-cosse-5b454815b"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >Me contacter via LinkedIn</a>
+                </div>
+                <div class="contact-info-item">
+                    <a href="#" class="download-btn" id="download-pdf">
+                        📥 Télécharger le CV en PDF
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- ==============================================
+                 PROFIL PROFESSIONNEL - AÉRÉ
+                 ============================================== -->
+            <section class="section reveal">
+                <h2>Profil Professionnel</h2>
+                <p class="profile-intro">
+                    Rédacteur technique Cloud avec <strong>6 ans d'expertise</strong> en management d'équipe et documentation publique chez OVHcloud.
+                </p>
+                
+                <div class="profile-highlights">
+                    <div class="highlight-item">
+                        <div class="highlight-icon">👥</div>
+                        <div class="highlight-text">
+                            <strong>Management d'équipe</strong> de rédacteurs techniques multilingues
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-item">
+                        <div class="highlight-icon">📚</div>
+                        <div class="highlight-text">
+                            <strong>Documentation technique</strong> de haute qualité en environnement Cloud
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-item">
+                        <div class="highlight-icon">🛠️</div>
+                        <div class="highlight-text">
+                            <strong>Outils modernes</strong> : Git, GitHub, VS Code, JIRA, ServiceNow, IA générative
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-item">
+                        <div class="highlight-icon">🌍</div>
+                        <div class="highlight-text">
+                            <strong>Expertise multilingue</strong> : Anglais & Espagnol professionnels
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==============================================
+                 EXPÉRIENCE PROFESSIONNELLE
+                 ============================================== -->
+            <section class="section reveal">
+                <h2>Expérience Professionnelle</h2>
+
+                <div class="experience-item">
+                    <h3>Manager d'Équipe Documentation & Rédacteur Technique Senior</h3>
+                    <div class="company">OVHcloud - Brest, France</div>
+                    <div class="date">Depuis 2019</div>
+                    <div class="description">
+                        <ul>
+                            <li><strong>Management d'équipe :</strong> Direction et coordination d'une équipe de rédacteurs techniques</li>
+                            <li>Pilotage stratégique de la documentation publique d'OVHcloud</li>
+                            <li>Recrutement, formation et développement des compétences de l'équipe</li>
+                            <li>Définition des processus et standards de documentation</li>
+                            <li>Création et maintenance de documentation technique multilingue</li>
+                            <li>QA, proofreading et mise en conformité des contributions open-source</li>
+                            <li>Gestion de projets documentaires via Git/GitHub, JIRA, Confluence, Bitbucket</li>
+                            <li>Utilisation d'outils IA pour la génération et l'optimisation de contenu</li>
+                            <li>Collaboration étroite avec les équipes produit, marketing et support</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Conseiller Support Client - Solutions de Téléphonie & Internet</h3>
+                    <div class="company">OVHcloud - Brest, France</div>
+                    <div class="date">2016 - 2019</div>
+                    <div class="description">
+                        <ul>
+                            <li>Support technique VoIP, SMS, xDSL, FTTH, OverTheBox</li>
+                            <li>Gestion du support client via réseaux sociaux (Sprout Social)</li>
+                            <li>Résolution de problèmes techniques complexes et accompagnement à la configuration</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Professeur d'Anglais Professionnel</h3>
+                    <div class="company">Faculté Victor Segalen (Brest) & Université de Quimper</div>
+                    <div class="date">2015 - 2016</div>
+                    <div class="description">
+                        <ul>
+                            <li>Enseignement de l'anglais professionnel aux étudiants en cursus LEA (Langues Etrangères Appliquées)</li>
+                            <li>Préparation de cours spécialisés pour le monde du travail</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Expériences Culturelles & Internationales</h3>
+                    <div class="date">2000 - 2014</div>
+                    <div class="description">
+                        <ul>
+                            <li><strong>2006 :</strong> Stage Culture, Mairie de Brest (projet La Carène)</li>
+                            <li><strong>2004 :</strong> Alliance Française de San José, Costa Rica</li>
+                            <li><strong>2003 :</strong> CARIBIA INC., Los Angeles (fabrication de cosmétiques)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Expériences Éducatives Complémentaires</h3>
+                    <div class="date">2001 - 2015</div>
+                    <div class="description">
+                        <ul>
+                            <li><strong>2009-2015 :</strong> Assistant pédagogique d'Anglais (Collège / Lycée à Brest et Pleyben)</li>
+                            <li><strong>2010-2012 :</strong> Professeur d'Anglais vacataire</li>
+                            <li><strong>2003-2004 :</strong> Moniteur d'informatique, Faculté de Lettres</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==============================================
+                 FORMATION
+                 ============================================== -->
+            <section class="section reveal">
+                <h2>Formation</h2>
+
+                <div class="education-item">
+                    <h3>Master 2 Management de Projets Multilingues</h3>
+                    <div class="company">Faculté Victor Segalen, Brest</div>
+                    <div class="date">2006</div>
+                    <div class="description">
+                        Mention Bien - Spécialisation projets économiques/culturels internationaux
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <h3>Maîtrise LEA (Langues Étrangères Appliquées)</h3>
+                    <div class="company">Faculté de Lettres et Langues, Brest</div>
+                    <div class="date">2004</div>
+                    <div class="description">
+                        Mention Bien - Anglais/Espagnol technique, commercial et juridique
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==============================================
+                 COMPÉTENCES TECHNIQUES
+                 ============================================== -->
+            <section class="section reveal">
+                <h2>Compétences Techniques</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>Documentation & Outils</h4>
+                        <ul class="skill-list">
+                            <li>Git, GitHub, Bitbucket, VS Code</li>
+                            <li>JIRA, Confluence, Phrase</li>
+                            <li>CMS : ServiceNow, Grav</li>
+                            <li>Markdown</li>
+                            <li>IA : génération, analyse, traduction</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4>Langues</h4>
+                        <ul class="skill-list">
+                            <li>Anglais : Courant (professionnel)</li>
+                            <li>Espagnol : Courant (professionnel)</li>
+                            <li>Français : Langue maternelle</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4>Informatique</h4>
+                        <ul class="skill-list">
+                            <li>Windows / macOS / Linux</li>
+                            <li>Pack Office</li>
+                            <li>GIMP, OBS</li>
+                            <li>System-prompting IA</li>
+                            <li>Télécom : VoIP, xDSL/FTTH, SMS</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4>Management & Méthodes</h4>
+                        <ul class="skill-list">
+                            <li>Gestion d'équipe multilingue</li>
+                            <li>Gestion et suivi de projets</li>
+                            <li>Méthode Agile</li>
+                            <li>Coordination multilingue</li>
+                            <li>Formation & Coaching</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==============================================
+                 CENTRES D'INTÉRÊT - AVEC ICÔNES
+                 ============================================== -->
+            <section class="section reveal">
+                <h2>Centres d'Intérêt</h2>
+                <div class="interests-grid">
+                    <div class="interest-item">
+                        <div class="interest-icon">🎵</div>
+                        <div class="interest-content">
+                            <div class="interest-title">Musique Indépendante</div>
+                            <div class="interest-description">
+                                Membre fondateur de "Les Platinistes" - Promotion de musiques indépendantes lors de festivals
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interest-item">
+                        <div class="interest-icon">📻</div>
+                        <div class="interest-content">
+                            <div class="interest-title">Radio</div>
+                            <div class="interest-description">
+                                Animateur radio sur Fréquence Mutine à Brest (2007-2009)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interest-item">
+                        <div class="interest-icon">💿</div>
+                        <div class="interest-content">
+                            <div class="interest-title">Collection Vinyles</div>
+                            <div class="interest-description">
+                                Collectionneur passionné de vinyles et musiques indépendantes
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interest-item">
+                        <div class="interest-icon">🎬</div>
+                        <div class="interest-content">
+                            <div class="interest-title">Cinéma & Tech</div>
+                            <div class="interest-description">
+                                Passionné de cinéma et nouvelles technologies
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.15 }
+        );
+
+        document.querySelectorAll(".reveal").forEach(el => {
+            observer.observe(el);
+        });
+
+        document.getElementById('download-pdf').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.print();
+        });
+    </script>
+</body>
+</html>
