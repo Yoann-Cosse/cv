@@ -9,7 +9,7 @@
            VARIABLES CSS - PALETTE DE COULEURS MODERNE
            ============================================== */
         :root {
-            /* Couleurs principales */
+            /* Couleurs principales - Mode clair */
             --bg: #ffffff;              /* Fond blanc pur */
             --text: #1f2933;            /* Gris très foncé pour texte principal et titres */
             --muted: #6b7280;           /* Gris secondaire pour texte moins important */
@@ -19,6 +19,43 @@
             --border-light: #e5e7eb;    /* Bordure grise claire */
             --bg-section: #f9fafb;      /* Fond sections gris très clair */
             --shadow: rgba(0, 0, 0, 0.1);
+            --page-bg: #f3f4f6;         /* Fond de page */
+        }
+
+        /* ==============================================
+           MODE SOMBRE - Adaptation automatique
+           S'active quand le navigateur est en mode sombre
+           ============================================== */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                /* Couleurs principales - Mode sombre */
+                --bg: #1f2937;              /* Fond gris très foncé */
+                --text: #f9fafb;            /* Texte blanc cassé */
+                --muted: #9ca3af;           /* Gris clair pour texte secondaire */
+                --accent: #3b82f6;          /* Bleu plus clair pour le contraste */
+                
+                /* Couleurs secondaires */
+                --border-light: #374151;    /* Bordures grises plus foncées */
+                --bg-section: #111827;      /* Fond sections très foncé */
+                --shadow: rgba(0, 0, 0, 0.3);
+                --page-bg: #111827;         /* Fond de page très foncé */
+            }
+
+            /* Adaptation du header en mode sombre */
+            .header {
+                background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%) !important;
+            }
+
+            /* Amélioration des bordures en mode sombre */
+            .experience-item, .education-item {
+                border-left-color: var(--border-light);
+            }
+
+            /* Amélioration du contraste des catégories en mode sombre */
+            .skill-category {
+                background: var(--bg-section);
+                border-color: var(--border-light);
+            }
         }
 
         /* ==============================================
@@ -35,7 +72,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: var(--text);         /* Texte principal - gris très foncé */
-            background: #f3f4f6;        /* Fond page gris clair */
+            background: var(--page-bg); /* Fond page - adaptatif mode sombre */
             padding: 20px;
         }
 
@@ -55,10 +92,12 @@
            HEADER - EN-TÊTE DU CV
            ============================================== */
         .header {
-            background: var(--accent); /* Fond bleu professionnel */
+            /* Dégradé bleu moderne et dynamique */
+            background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
             color: white;
-            padding: 40px;
+            padding: 40px 40px 30px 40px;
             text-align: center;
+            position: relative;
         }
 
         /* Nom principal (h1) */
@@ -72,34 +111,86 @@
         .header .subtitle {
             font-size: 1.2em;
             opacity: 0.95;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: white;              /* Texte blanc */
         }
 
-        /* Informations de contact */
+        /* Conteneur des informations de contact - disposition horizontale élégante */
         .contact-info {
             display: flex;
             justify-content: center;
+            align-items: center;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 25px;
             margin-top: 20px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .contact-info div {
+        .contact-info-item {
             display: flex;
             align-items: center;
             gap: 8px;
-            color: white;              /* Texte blanc */
+            color: white;
+            font-size: 0.95em;
+        }
+
+        /* Séparateurs entre les items */
+        .contact-info-item:not(:last-child)::after {
+            content: "•";
+            margin-left: 25px;
+            opacity: 0.6;
         }
 
         /* Lien LinkedIn dans le header */
         .contact-info a {
-            color: white;              /* Lien blanc */
-            text-decoration: underline;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            transition: border-color 0.3s ease;
         }
 
         .contact-info a:hover {
-            opacity: 0.8;
+            border-bottom-color: white;
+        }
+
+        /* Bouton de téléchargement PDF - style cohérent avec les autres items */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;      /* Fond transparent comme les autres items */
+            color: white;                 /* Texte blanc comme les autres items */
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            border: 1.5px solid rgba(255, 255, 255, 0.4);  /* Bordure subtile */
+        }
+
+        .download-btn:hover {
+            background: rgba(255, 255, 255, 0.15);  /* Fond léger au survol */
+            border-color: rgba(255, 255, 255, 0.8); /* Bordure plus visible */
+            transform: translateY(-2px);
+        }
+
+        /* Cacher le bouton à l'impression */
+        @media print {
+            .download-btn {
+                display: none;
+            }
+            
+            .contact-info {
+                background: transparent;
+            }
         }
 
         /* ==============================================
@@ -265,7 +356,13 @@
 
             .contact-info {
                 flex-direction: column;
-                align-items: center;
+                gap: 15px;
+                padding: 15px;
+                border-radius: 20px;
+            }
+
+            .contact-info-item::after {
+                display: none;
             }
 
             .main-content {
@@ -304,21 +401,27 @@
     <div class="container">
         <!-- ==============================================
              HEADER - EN-TÊTE DU CV
-             Fond bleu accent (--accent)
+             Fond dégradé bleu moderne
              ============================================== -->
         <header class="header">
             <h1>Yoann Cosse</h1>
             <div class="subtitle">Rédacteur Technique & Product Documentation Manager</div>
+            
+            <!-- Informations de contact - disposition horizontale élégante -->
             <div class="contact-info">
-                <div>📍 Brest, France</div>
-                <div>
-                    💬 Me contacter via LinkedIn :
-                    <a
+                <div class="contact-info-item">
+                    📍 Brest, France
+                </div>
+                <div class="contact-info-item">
+                    💬 <a
                       href="https://www.linkedin.com/in/yoann-cosse-5b454815b"
                       target="_blank"
                       rel="noopener noreferrer"
-                    >
-                      yoann-cosse
+                    >LinkedIn</a>
+                </div>
+                <div class="contact-info-item">
+                    <a href="#" class="download-btn" id="download-pdf">
+                        📥 Télécharger PDF
                     </a>
                 </div>
             </div>
@@ -528,7 +631,7 @@
     </div>
 
     <!-- ==============================================
-         JAVASCRIPT - ANIMATION SCROLL
+         JAVASCRIPT - ANIMATION SCROLL & PDF
          ============================================== -->
     <script>
         // Observer pour l'animation au scroll des sections
@@ -547,6 +650,17 @@
         // Appliquer l'observer à tous les éléments avec classe "reveal"
         document.querySelectorAll(".reveal").forEach(el => {
             observer.observe(el);
+        });
+
+        // ==============================================
+        // GÉNÉRATION DU PDF
+        // ==============================================
+        document.getElementById('download-pdf').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Utiliser window.print() - Fonctionne partout sans dépendance
+            // L'utilisateur peut choisir "Enregistrer en PDF" dans le dialogue d'impression
+            window.print();
         });
     </script>
 </body>
