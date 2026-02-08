@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoann Cosse - CV</title>
+    <style>
+        /* ==============================================
+           VARIABLES CSS - PALETTE DE COULEURS MODERNE
+           ============================================== */
+        :root {
+            /* Couleurs principales */
+            --bg: #ffffff;              /* Fond blanc pur */
+            --text: #1f2933;            /* Gris très foncé pour texte principal et titres */
+            --muted: #6b7280;           /* Gris secondaire pour texte moins important */
+            --accent: #2563eb;          /* Bleu professionnel moderne pour liens/séparateurs/dates */
+            
+            /* Couleurs secondaires */
+            --border-light: #e5e7eb;    /* Bordure grise claire */
+            --bg-section: #f9fafb;      /* Fond sections gris très clair */
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        /* ==============================================
+           RESET ET BASE
+           ============================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* BODY - Corps de page */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);         /* Texte principal - gris très foncé */
+            background: #f3f4f6;        /* Fond page gris clair */
+            padding: 20px;
+        }
+
+        /* ==============================================
+           CONTENEUR PRINCIPAL
+           ============================================== */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--bg);      /* Fond blanc */
+            box-shadow: 0 10px 40px var(--shadow);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        /* ==============================================
+           HEADER - EN-TÊTE DU CV
+           ============================================== */
+        .header {
+            background: var(--accent); /* Fond bleu professionnel */
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        /* Nom principal (h1) */
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: white;              /* Texte blanc sur fond bleu */
+        }
+
+        /* Sous-titre / Poste */
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+            margin-bottom: 20px;
+            color: white;              /* Texte blanc */
+        }
+
+        /* Informations de contact */
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;              /* Texte blanc */
+        }
+
+        /* Lien LinkedIn dans le header */
+        .contact-info a {
+            color: white;              /* Lien blanc */
+            text-decoration: underline;
+        }
+
+        .contact-info a:hover {
+            opacity: 0.8;
+        }
+
+        /* ==============================================
+           CONTENU PRINCIPAL
+           ============================================== */
+        .main-content {
+            padding: 40px;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        /* Animation reveal au scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease-out,
+                        transform 0.6s ease-out;
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Titres de section (h2) */
+        .section h2 {
+            color: var(--text);        /* Titres - gris très foncé */
+            font-size: 1.8em;
+            border-bottom: 3px solid var(--accent); /* Bordure bleue accent */
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* ==============================================
+           EXPÉRIENCES ET FORMATION
+           ============================================== */
+        .experience-item, .education-item {
+            margin-bottom: 30px;
+            padding-left: 20px;
+            border-left: 3px solid var(--border-light); /* Bordure grise claire */
+        }
+
+        /* Titres de poste / diplôme (h3) */
+        .experience-item h3, .education-item h3 {
+            color: var(--text);        /* Titres - gris très foncé */
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+
+        /* Dates - couleur accent pour les faire ressortir */
+        .date {
+            color: var(--accent);      /* Dates - bleu accent */
+            font-style: italic;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        /* Nom d'entreprise / établissement */
+        .company {
+            font-weight: bold;
+            color: var(--text);        /* Texte principal - gris foncé */
+            margin-bottom: 10px;
+        }
+
+        /* ==============================================
+           COMPÉTENCES - GRILLE
+           ============================================== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        /* Catégories de compétences */
+        .skill-category {
+            background: var(--bg-section); /* Fond gris très clair */
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+        }
+
+        /* Titres de catégories (h4) */
+        .skill-category h4 {
+            color: var(--accent);      /* Titres - bleu accent */
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        /* Listes de compétences */
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            color: var(--text);        /* Texte principal */
+            margin-bottom: 5px;
+        }
+
+        /* Puces des listes de compétences */
+        .skill-list li:before {
+            content: "▸ ";
+            color: var(--accent);      /* Puces - bleu accent */
+            font-weight: bold;
+        }
+
+        /* ==============================================
+           LANGUES (non utilisé actuellement mais prêt)
+           ============================================== */
+        .languages {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .language-item {
+            background: var(--bg-section);
+            padding: 15px 25px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .language-item strong {
+            display: block;
+            color: var(--accent);
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        /* ==============================================
+           DESCRIPTION ET LISTES
+           ============================================== */
+        .description {
+            line-height: 1.8;
+            color: var(--text);        /* Texte principal */
+        }
+
+        /* Listes à puces standard */
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        ul li {
+            color: var(--text);        /* Texte principal */
+            margin-bottom: 8px;
+        }
+
+        /* Texte en gras dans les listes */
+        ul li strong {
+            color: var(--text);        /* Texte principal */
+        }
+
+        /* ==============================================
+           RESPONSIVE - MOBILE
+           ============================================== */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ==============================================
+           IMPRESSION
+           ============================================== */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+
+            /* Header en gris foncé pour économiser l'encre */
+            .header {
+                background: var(--text) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ==============================================
+             HEADER - EN-TÊTE DU CV
+             Fond bleu accent (--accent)
+             ============================================== -->
+        <header class="header">
+            <h1>Yoann Cosse</h1>
+            <div class="subtitle">Rédacteur Technique & Product Documentation Manager</div>
+            <div class="contact-info">
+                <div>📍 Brest, France</div>
+                <div>
+                    💬 Me contacter via LinkedIn :
+                    <a
+                      href="https://www.linkedin.com/in/yoann-cosse-5b454815b"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      yoann-cosse
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- ==============================================
+                 PROFIL PROFESSIONNEL
+                 Titre: --text (gris foncé)
+                 Bordure: --accent (bleu)
+                 ============================================== -->
+            <section class="section reveal">
+                <h2>Profil Professionnel</h2>
+                <p class="description">
+                    Rédacteur technique Cloud avec 6 ans d'expertise en management d'équipe de rédacteurs techniques et en documentation publique chez OVHcloud. 
+                    Direction et coordination d'une équipe dédiée à la production de documentation technique multilingue de haute qualité. 
+                    Spécialisé dans la création de contenu technique, la gestion de projets documentaires et l'utilisation d'outils de pointe 
+                    incluant Git, GitHub, Visual Studio Code, JIRA, ServiceNow et l'IA générative. Fort d'une expérience internationale et d'excellentes compétences en anglais et espagnol.
+                </p>
+            </section>
+
+            <!-- ==============================================
+                 EXPÉRIENCE PROFESSIONNELLE
+                 Titres h3: --text (gris foncé)
+                 Dates: --accent (bleu)
+                 Bordure gauche: --border-light (gris clair)
+                 ============================================== -->
+            <section class="section reveal">
+                <h2>Expérience Professionnelle</h2>
+
+                <!-- Poste actuel - Manager Documentation -->
+                <div class="experience-item">
+                    <h3>Manager d'Équipe Documentation & Rédacteur Technique Senior</h3>
+                    <div class="company">OVHcloud - Brest, France</div>
+                    <div class="date">Depuis 2019</div>
+                    <div class="description">
+                        <ul>
+                            <li><strong>Management d'équipe:</strong> Direction et coordination d'une équipe de rédacteurs techniques</li>
+                            <li>Pilotage stratégique de la documentation publique d'OVHcloud</li>
+                            <li>Recrutement, formation et développement des compétences de l'équipe</li>
+                            <li>Définition des processus et standards de documentation</li>
+                            <li>Création et maintenance de documentation technique multilingue</li>
+                            <li>QA, proofreading et mise en conformité des contributions open-source</li>
+                            <li>Gestion de projets documentaires via Git/GitHub, JIRA, Confluence, Bitbucket</li>
+                            <li>Utilisation d'outils IA pour la génération et l'optimisation de contenu</li>
+                            <li>Collaboration étroite avec les équipes techniques, produit et support</li>
+                            <li>Amélioration continue des workflows et de la qualité documentaire</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Support Client OVHcloud -->
+                <div class="experience-item">
+                    <h3>Conseiller Support Client - Solutions de Téléphonie & Internet</h3>
+                    <div class="company">OVHcloud - Brest, France</div>
+                    <div class="date">2016 - 2019</div>
+                    <div class="description">
+                        <ul>
+                            <li>Support technique sur les solutions de téléphonie VoIP, SMS et accès Internet (xDSl, FTTH, OverTheBox)</li>
+                            <li>Gestion du support client via réseaux sociaux (Sprout Social)</li>
+                            <li>Résolution de problèmes techniques complexes et accompanement des clients à la configuration</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Professeur d'Anglais -->
+                <div class="experience-item">
+                    <h3>Professeur d'Anglais Professionnel</h3>
+                    <div class="company">Faculté Victor Segalen (Brest) & Université de Quimper</div>
+                    <div class="date">2015 - 2016</div>
+                    <div class="description">
+                        <ul>
+                            <li>Enseignement de l'anglais professionnel aux étudiants en cursus LEA (Langues Etrangères Appliquées)</li>
+                            <li>Préparation de cours spécialisés pour le monde du travail</li>
+                            <li>Évaluation et suivi pédagogique des étudiants</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Expériences culturelles -->
+                <div class="experience-item">
+                    <h3>Expériences Culturelles & Internationales</h3>
+                    <div class="date">2000 - 2014</div>
+                    <div class="description">
+                        <ul>
+                            <li><strong>2006:</strong> Stage - Département Culture, Mairie de Brest (gestion de projet La Carène)</li>
+                            <li><strong>2004:</strong> Alliance Française de San José, Costa Rica (organisation d'activités culturelles)</li>
+                            <li><strong>2003:</strong> CARIBIA, INC., Los Angeles (agent commercial cosmétiques)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Expériences éducatives -->
+                <div class="experience-item">
+                    <h3>Expériences Éducatives Complémentaires</h3>
+                    <div class="date">2001 - 2012</div>
+                    <div class="description">
+                        <ul>
+                            <li><strong>Depuis 2009:</strong> Assistant pédagogique d'Anglais et d'éducation (Lycées Pleyben et St-Pol Roux, Brest)</li>
+                            <li><strong>2010-2012:</strong> Professeur d'Anglais vacataire (niveaux Post-Bac, Bac professionnel et CAP)</li>
+                            <li><strong>2003-2004:</strong> Moniteur d'informatique, Faculté de Lettres de Brest (public adulte, Mac et Windows)</li>
+                            <li><strong>2001-2003:</strong> Soutien aux élèves en difficulté</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==============================================
+                 FORMATION
+                 ============================================== -->
+            <section class="section reveal">
+                <h2>Formation</h2>
+
+                <!-- Master 2 -->
+                <div class="education-item">
+                    <h3>Master 2 Management de Projets Multilingues</h3>
+                    <div class="company">Faculté de Lettres et Langues Victor Segalen, Brest</div>
+                    <div class="date">2006</div>
+                    <div class="description">
+                        Mention Bien - Spécialisation en élaboration, suivi et contrôle financier de projets économiques ou culturels internationaux
+                    </div>
+                </div>
+
+                <!-- Maîtrise LEA -->
+                <div class="education-item">
+                    <h3>Maîtrise LEA (Langues Étrangères Appliquées)</h3>
+                    <div class="company">Faculté de Lettres et Langues, Brest</div>
+                    <div class="date">2004</div>
+                    <div class="description">
+                        Mention Bien - Anglais technique, commercial et juridique / Espagnol technique, commercial et juridique
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ==============================================
+                 COMPÉTENCES TECHNIQUES
+                 Titres h4: --accent (bleu)
+                 Fond catégories: --bg-section (gris très clair)
+                 Puces: --accent (bleu)
+                 ============================================== -->
+            <section class="section reveal">
+                <h2>Compétences Techniques</h2>
+                <div class="skills-grid">
+                    <!-- Documentation & Outils -->
+                    <div class="skill-category">
+                        <h4>Documentation & Outils</h4>
+                        <ul class="skill-list">
+                            <li>Git & GitHub (expert)</li>
+                            <li>Visual Studio Code</li>
+                            <li>JIRA & Confluence</li>
+                            <li>ServiceNow</li>
+                            <li>Markdown</li>
+                            <li>Outils IA de génération de contenu</li>
+                        </ul>
+                    </div>
+
+                    <!-- Langues -->
+                    <div class="skill-category">
+                        <h4>Langues</h4>
+                        <ul class="skill-list">
+                            <li>Anglais: Courant (professionnel)</li>
+                            <li>Espagnol: Courant (professionnel)</li>
+                            <li>Français: Langue maternelle</li>
+                        </ul>
+                    </div>
+
+                    <!-- Informatique -->
+                    <div class="skill-category">
+                        <h4>Informatique</h4>
+                        <ul class="skill-list">
+                            <li>Windows / macOS / Linux</li>
+                            <li>Pack Office (expert)</li>
+                            <li>GIMP</li>
+                            <li>Internet & Recherche</li>
+                        </ul>
+                    </div>
+
+                    <!-- Management & Méthodes -->
+                    <div class="skill-category">
+                        <h4>Management & Méthodes</h4>
+                        <ul class="skill-list">
+                            <li>Gestion d'équipe</li>
+                            <li>Gestion de projets</li>
+                            <li>Méthodes Agiles</li>
+                            <li>Coordination multilingue</li>
+                            <li>Formation & Coaching</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==============================================
+                 CENTRES D'INTÉRÊT
+                 ============================================== -->
+            <section class="section reveal">
+                <h2>Centres d'Intérêt</h2>
+                <div class="description">
+                    <ul>
+                        <li><strong>Musique:</strong> Membre fondateur de l'association "Les Platinistes" (promotion et diffusion de musiques indépendantes par le support vinyle)</li>
+                        <li><strong>Radio:</strong> Animateur radio sur Fréquence Mutine (2007-2009)</li>
+                        <li><strong>Culture:</strong> Passionné de culture internationale et de projets multilingues</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ==============================================
+         JAVASCRIPT - ANIMATION SCROLL
+         ============================================== -->
+    <script>
+        // Observer pour l'animation au scroll des sections
+        const observer = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.15 }
+        );
+
+        // Appliquer l'observer à tous les éléments avec classe "reveal"
+        document.querySelectorAll(".reveal").forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
